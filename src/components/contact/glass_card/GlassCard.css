@@ -1,0 +1,122 @@
+/* GlassCard.css - Minimal Version */
+
+:root {
+  --glass-primary: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-highlight: rgba(255, 255, 255, 0.25);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --text-primary: #f8f8f8;
+  --text-secondary: #cccccc;
+  --accent-primary: #0aff0a;
+  --accent-secondary: #ff1c8d;
+  --btn-bg: #111111;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-focus: rgba(255, 255, 255, 0.2);
+  --error-color: #ff3860;
+  --success-color: rgba(10, 255, 10, 0.8);
+}
+
+/* Glass card styling - minimal and performance-focused */
+.glass-card {
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: var(--glass-primary);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 20px var(--glass-shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Title styling */
+.glass-card-title {
+  text-align: center;
+  margin-bottom: 1.8rem;
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.glass-card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  border-radius: 2px;
+}
+
+/* Glitch button effect */
+.glitch-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(10, 255, 10, 0.05) 0,
+    rgba(10, 255, 10, 0.05) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  opacity: 0.3;
+  animation: scanlines 8s linear infinite;
+}
+
+/* Essential keyframes */
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(10px, -15px); }
+  66% { transform: translate(-5px, -10px); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .glass-card-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.4rem;
+  }
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-button::before {
+    animation: none;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+  }
+}

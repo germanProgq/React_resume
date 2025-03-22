@@ -1,0 +1,85 @@
+/* src/components/Projects.css */
+
+.projects-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end)); */
+}
+
+.background-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.projects-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 2rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Enhanced card interactions and animations for desktop */
+.project-card {
+  background: var(--nav-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  color: var(--text-primary);
+  border: 1px solid var(--outline-color);
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: rotate(45deg);
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover::before {
+  transform: rotate(0deg);
+}
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile adjustments: disable hover effects, make cards bigger, and add a click (active) effect */
+@media (hover: none) and (pointer: coarse) {
+  .project-card {
+    padding: 2rem; /* Increase card size on mobile */
+  }
+  .project-card:hover,
+  .project-card:hover::before {
+    transform: none;
+    box-shadow: none;
+  }
+  .project-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+}

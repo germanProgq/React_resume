@@ -1,0 +1,116 @@
+/* Base styles for the navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0.8rem 2rem;
+  background: var(--nav-bg, #0d0d0d);
+  color: var(--text-primary, #fff);
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo styles with a programming font and subtle hover effect */
+.nav-logo a {
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-logo a:hover {
+  color: var(--link-color, #00ff99);
+  transform: scale(1.05);
+}
+
+/* Burger icon: hidden on larger screens, appears on mobile */
+.burger-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.burger-icon .line {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-primary, #fff);
+  transition: all 0.3s ease;
+}
+
+/* Transformations for burger icon when open */
+.burger-icon .line.top.open {
+  transform: translateY(9px) rotate(45deg);
+}
+.burger-icon .line.middle.open {
+  opacity: 0;
+}
+.burger-icon .line.bottom.open {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Nav links for desktop */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: var(--text-primary, #fff);
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Underline effect on hover */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--link-hover-color, #00ff99);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .burger-icon {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: var(--nav-bg, #0d0d0d);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4rem 2rem;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+  }
+  /* Slide in the menu when open */
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links a {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+  }
+}

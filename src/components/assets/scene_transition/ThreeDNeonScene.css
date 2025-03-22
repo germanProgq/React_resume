@@ -1,0 +1,122 @@
+/* threeDNeonScene.css */
+
+.cyber-container {
+  position: relative;
+  width: 100%;
+  height: 600px; /* Adjust as needed */
+  margin: 2rem auto;
+  border: 1px solid var(--outline-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* The form container */
+.cyber-terminal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(28, 0, 44, 0.95);
+  padding: 1.2rem;
+  border-radius: 8px;
+  min-width: 280px;
+  width: 300px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5),
+              0 0 30px var(--neon-accent-transparent);
+  z-index: 2;
+}
+
+/* Animated scanline effect */
+.scanline {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    var(--neon-accent-transparent) 51%,
+    transparent 51%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1;
+  animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* The actual form styling */
+.cyber-form {
+  position: relative;
+  z-index: 10;
+}
+
+.cyber-label {
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px var(--neon-accent-transparent);
+}
+
+.cyber-input,
+.cyber-textarea {
+  width: 100%;
+  background: var(--nav-bg);
+  border: 1px solid var(--outline-color);
+  color: var(--text-primary);
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: 'Space Mono', monospace;
+}
+
+.cyber-input:focus,
+.cyber-textarea:focus {
+  border-color: var(--neon-accent);
+  box-shadow: 0 0 15px var(--neon-accent-transparent);
+  background: var(--nav-bg-hover);
+}
+
+/* Simple button (instead of the Sphere) */
+.cyber-button-3d {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Space Mono', monospace;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cyber-container {
+    height: 400px;
+  }
+  .cyber-terminal {
+    width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cyber-container {
+    height: 320px;
+  }
+  .cyber-terminal {
+    width: 240px;
+  }
+  .cyber-label {
+    font-size: 0.8rem;
+  }
+}

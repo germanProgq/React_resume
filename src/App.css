@@ -1,0 +1,47 @@
+/* Base container styling */
+.App {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* CSS Variables for custom scrollbar */
+:root {
+  --scrollbar-width: 10px;
+  --track-color: #1a1a1a;
+  --thumb-bg: #4B0082;
+  --thumb-hover-bg: #5e00b5;
+  --thumb-border-radius: 50%;
+  --thumb-border: 1px solid #000;
+}
+
+/* Global smooth scrolling settings */
+html,
+body {
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumb-bg) var(--track-color);
+}
+
+/* Apply custom scrollbar styling only on devices with a fine pointer */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-width);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--track-color);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--thumb-bg);
+    border-radius: var(--thumb-border-radius);
+    border: var(--thumb-border);
+    transition: background 0.3s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--thumb-hover-bg);
+  }
+}

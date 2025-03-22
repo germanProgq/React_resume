@@ -1,0 +1,119 @@
+/* src/components/Timeline.css */
+.timeline-section {
+  width: 100%;
+  min-height: 150vh; /* Set minimum height to ensure enough scroll space */
+  position: relative;
+  background: radial-gradient(ellipse at center, var(--nav-bg) 60%, var(--bg-gradient-end) 100%);
+  padding: 4rem 0;
+  z-index: 1;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.timeline-section h2 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: var(--link-color);
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 15px rgba(106, 13, 173, 0.4);
+  position: relative;
+  padding-bottom: 1rem;
+  max-width: 90%; /* Prevent text from overflowing */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.timeline-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--link-color), transparent);
+}
+
+.timeline-canvas-container {
+  width: 100%;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+  touch-action: pan-y; /* Better touch handling for mobile */
+  max-width: 100vw; /* Ensure container doesn't exceed viewport width */
+  margin: 0 auto; /* Center the container */
+  display: flex;
+  justify-content: center;
+}
+
+/* Add scroll indicator to hint at scrollable content */
+.timeline-section::after {
+  content: '';
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236A0DAD'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-section {
+    min-height: 200vh; /* More scroll space on mobile */
+    padding: 3rem 0.5rem 5rem; /* Additional horizontal padding to prevent overflow */
+  }
+
+  .timeline-section h2 {
+    margin-bottom: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    max-width: 85%; /* Further limit text width on mobile */
+  }
+
+  .timeline-canvas-container {
+    min-height: 100vh; /* Ensure full viewport height on mobile */
+    padding: 0; /* Remove any padding that might cause overflow */
+  }
+  
+  /* Make scroll indicator more prominent on mobile */
+  .timeline-section::after {
+    width: 50px;
+    height: 50px;
+    bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-section {
+    min-height: 250vh; /* Even more scroll space on small mobile */
+    padding: 2rem 0.25rem 6rem;
+  }
+
+  .timeline-section h2 {
+    font-size: clamp(1.3rem, 7vw, 1.75rem);
+    max-width: 80%;
+  }
+  
+  /* Further adjust container for small screens */
+  .timeline-canvas-container {
+    min-height: 120vh;
+  }
+}
