@@ -1,73 +1,84 @@
 .canvas-container {
-  /* Center items and allow them to grow vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* Fill width */
+  /* Use grid instead of flex for better performance */
+  display: grid;
+  place-items: center;
+  
+  /* Fill parent width */
   width: 100%;
-
-  /* Default container height (desktop) */
-  height: 80vh;
-  min-height: 500px;
+  
+  /* Fixed aspect ratio for better stability */
+  height: 75vh;
+  min-height: 450px;
   max-height: 800px;
-
-  /* Positioning */
+  
+  /* Contain the canvas properly */
   position: relative;
-
-  /* IMPORTANT: Allow vertical scroll if canvas is larger than container */
-  overflow-y: auto;  
-
-  /* Hide scrollbar “thumb,” but still allow scrolling */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-.canvas-container::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari, Opera */
+  overflow: visible;
+  
+  /* Promote GPU acceleration */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .complex-canvas {
-  /* Let JS handle actual resolution. This just ensures it fills container's width */
+  /* Let canvas take available space */
   width: 100%;
   height: 100%;
   display: block;
-
-  /* Allow horizontal panning, but not vertical on the canvas itself */
-  touch-action: pan-x;
+  
+  /* Improve rendering */
+  image-rendering: optimizeSpeed;
+  
+  /* Allow scrolling through */
+  touch-action: auto;
+  
+  /* Hardware acceleration */
+  transform: translateZ(0);
 }
 
-/* ----------- Mobile-specific styles ----------- */
+/* Mobile-specific optimizations */
 @media (max-width: 600px) {
   .canvas-container {
-    /* Let container auto-expand with content on mobile */
+    /* Adjust height for mobile layouts */
     height: auto;
-    min-height: 500px;
-    max-height: none;  /* remove if you want truly unlimited height */
-
-    /* Some padding around the canvas if you like */
-    padding: 20px 10px;
-    box-sizing: border-box;
-
-    /* Still allow vertical scroll if needed */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+    
+    /* Safer min-height that works better across devices */
+    min-height: 400px;
+    
+    /* Remove constraints to allow proper sizing based on content */
+    max-height: none;
+    
+    /* Better padding for touch */
+    padding: 10px 0;
   }
-
+  
   .complex-canvas {
-    /* Let the JS set the canvas height. Don’t constrain it here */
-    height: auto;
-    min-height: 800px;  /* or remove if you want no forced minimum */
+    /* Use dynamic height from JavaScript, don't enforce a fixed min-height */
+    min-height: unset;
+    
+    /* Prevent content from being cut off */
     overflow: visible;
   }
 }
 
-/* (Optional) If you have extremely large sets on certain screens: */
-@media (min-width: 601px) and (max-height: 800px) {
+/* Medium screens with limited height */
+@media (min-width: 601px) and (max-height: 700px) {
   .canvas-container {
-    height: 90vh;
-    min-height: 600px;
-    /* Keep overflow-y: auto so it scrolls if needed */
-    overflow-y: auto;
+    /* Slightly taller relative height */
+    height: 85vh;
+    min-height: 400px;
   }
+}
+
+/* Larger screens */
+@media (min-width: 1200px) {
+  .canvas-container {
+    /* Cap maximum height on very large screens */
+    max-height: 850px;
+  }
+}
+
+/* Ensure height is correctly handled when embedded */
+.fade-in-section .canvas-container {
+  height: 100%;
 }
