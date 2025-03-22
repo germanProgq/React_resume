@@ -431,8 +431,18 @@ export default function ProgrammingLanguages() {
       const deltaTime = timestamp - lastUpdateTimeRef.current;
       lastUpdateTimeRef.current = timestamp;
       
-      // Use clearRect to maintain transparent background
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Fix for the background issue on desktop
+      if (!isMobile) {
+        // Create gradient background to match the theme
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height / dpr);
+        gradient.addColorStop(0, '#2e003e'); // bgGradientStart from theme
+        gradient.addColorStop(1, '#120026'); // bgGradientEnd from theme
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      } else {
+        // Use clearRect to maintain transparent background on mobile
+        ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      }
 
       // If dragging a node on mobile
       if (isMobile && draggedNodeIndex !== null && pointer.active) {

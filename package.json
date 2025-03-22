@@ -1,7 +1,7 @@
 {
   "name": "resume_react",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "homepage": "https://germanProgq/github.io/React_resume",
   "type": "module",
   "scripts": {
